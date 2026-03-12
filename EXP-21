@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main() {
+    int blocks[5]={100,500,200,300,600};
+    int process[4]={212,417,112,426};
+    int i,j,worst;
+
+    for(i=0;i<4;i++){
+        worst=-1;
+        for(j=0;j<5;j++){
+            if(blocks[j]>=process[i]){
+                if(worst==-1 || blocks[j]>blocks[worst])
+                    worst=j;
+            }
+        }
+
+        if(worst!=-1){
+            printf("Process %d allocated to block %d\n",i+1,worst+1);
+            blocks[worst]-=process[i];
+        }
+    }
+}
