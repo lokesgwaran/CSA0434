@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+int main() {
+    int fd;
+    char buffer[50];
+
+    fd = open("test.txt", O_CREAT | O_RDWR, 0777);
+
+    write(fd, "Hello UNIX System Calls", 24);
+
+    lseek(fd, 0, SEEK_SET);
+
+    read(fd, buffer, 24);
+
+    printf("File Content: %s\n", buffer);
+
+    close(fd);
+
+    return 0;
+}
