@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main() {
+    int n, i;
+
+    printf("Enter number of records: ");
+    scanf("%d", &n);
+
+    printf("Accessing records sequentially:\n");
+
+    for(i=1;i<=n;i++) {
+        printf("Reading record %d\n", i);
+    }
+
+    return 0;
+}
