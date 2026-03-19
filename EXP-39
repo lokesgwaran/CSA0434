@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int req[100], n, head, size, i, j, seek = 0;
+
+    printf("Enter number of requests: ");
+    scanf("%d", &n);
+
+    printf("Enter requests:\n");
+    for(i=0;i<n;i++)
+        scanf("%d", &req[i]);
+
+    printf("Enter initial head position: ");
+    scanf("%d", &head);
+
+    printf("Enter disk size: ");
+    scanf("%d", &size);
+
+    // sort
+    for(i=0;i<n;i++)
+        for(j=i+1;j<n;j++)
+            if(req[i] > req[j]) {
+                int temp = req[i];
+                req[i] = req[j];
+                req[j] = temp;
+            }
+
+    // move right
+    for(i=0;i<n;i++) {
+        if(req[i] >= head) {
+            seek += abs(req[i] - head);
+            head = req[i];
+        }
+    }
+
+    // jump to beginning
+    seek += abs(size - head);
+    seek += size;
+    head = 0;
+
+    // continue
+    for(i=0;i<n;i++) {
+        if(req[i] < head) {
+            seek += abs(req[i] - head);
+            head = req[i];
+        }
+    }
+
+    printf("Total Seek Time: %d\n", seek);
+    return 0;
+}
